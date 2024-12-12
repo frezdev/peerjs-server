@@ -1,0 +1,13 @@
+{
+  "name": "peerjs-server",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "author": "frezdev <carlos.andres.ff2912@gmail.com>",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "peer": "^1.0.2"
+  }
+}
