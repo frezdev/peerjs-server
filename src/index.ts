@@ -6,7 +6,9 @@ import http from "http";
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:3000", "https://meet.mimstechcorp.net"],
+}));
 
 const server = http.createServer((_req, res) => {
   res.writeHead(200, { "Content-Type": "text/plain" });
@@ -14,8 +16,6 @@ const server = http.createServer((_req, res) => {
 });
 
 const PORT = process.env.PORT || 9000;
-
-app.use(express.static("public"));
 
 // Configuración del servidor PeerJS
 const peerServer = ExpressPeerServer(server, {
