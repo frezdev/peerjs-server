@@ -1,13 +1,25 @@
 {
   "name": "peerjs-server",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "author": "frezdev <carlos.andres.ff2912@gmail.com>",
   "scripts": {
-    "start": "node ./src/index.js"
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prestart": "yarn build",
+    "start:dev": "nodemon .",
+    "start": "npm run build && node dist/index.js",
+    "dev": "concurrently --kill-others \"npm run watch\" \"npm run start:dev\""
   },
   "license": "MIT",
   "dependencies": {
     "peer": "^1.0.2"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "nodemon": "^3.1.7",
+    "tslint": "^6.1.3",
+    "typescript": "^5.7.2"
   }
 }

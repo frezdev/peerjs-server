@@ -1,0 +1,33 @@
+name: Deploy Node.js App to AWS EC2
+
+on:
+  push:
+    branches:
+      - main # Cambia esto por la rama que desees desplegar
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      # 1. Chequear el código
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Configurar Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 21 # Cambia a la versión de Node.js que uses
+
+      # 3. Instalar dependencias
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Ejecutar pruebas
+      - name: Run tests
+        run: npm run test
+
+      # 5. Construir la aplicación (si aplica)
+      - name: Build the app
+        run: npm run build # Cambia si tu app no requiere build
