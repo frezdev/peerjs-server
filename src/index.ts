@@ -1,13 +1,25 @@
-import { PeerServer } from 'peer';
+import { ExpressPeerServer } from 'peer';
+import express from "express";
+import cors from "cors";
+
+import http from "http";
+
+const app = express();
+
+app.use(cors());
+
+const server = http.createServer((_req, res) => {
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("Hello world!");
+});
+
+const PORT = process.env.PORT || 9000;
+
+app.use(express.static("public"));
 
 // Configuración del servidor PeerJS
-const peerServer = PeerServer({
-  port: 9000, // Puerto para PeerJS
-  path: '/peerjs', // Ruta del servidor PeerJS
-  // ssl: {
-  //   key: '/etc/ssl/private/your-private-key.key', // Ruta a tu clave privada SSL
-  //   cert: '/etc/ssl/certs/your-certificate.crt', // Ruta a tu certificado SSL
-  // },
+const peerServer = ExpressPeerServer(server, {
+  allow_discovery: true,
 });
 
 // Manejar eventos importantes
@@ -17,4 +29,10 @@ peerServer.on('connection', (client) => {
 
 peerServer.on('disconnect', (client) => {
   console.log(`Cliente desconectado, ID: ${client.getId()}`);
+});
+
+app.use("/peer", peerServer);
+
+server.listen(PORT, () => {
+  console.log(`PeerJS server running on port ${PORT}`);
 });

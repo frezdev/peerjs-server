@@ -14,9 +14,12 @@
   },
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
     "peer": "^1.0.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "concurrently": "^9.1.0",
     "nodemon": "^3.1.7",
     "tslint": "^6.1.3",

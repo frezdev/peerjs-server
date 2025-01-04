@@ -31,3 +31,5 @@ jobs:
       # 5. Construir la aplicación (si aplica)
       - name: Build the app
         run: npm run build # Cambia si tu app no requiere build
+
+      - run: pm2 restart peerjs_server
